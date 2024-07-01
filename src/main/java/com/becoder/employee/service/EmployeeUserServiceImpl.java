@@ -21,8 +21,16 @@ public class EmployeeUserServiceImpl implements EmployeeUserService {
 
         try {
             Employee employee=empRepository.getById(employeUpdateModel.getId());
+            employee.setFirstName(employeUpdateModel.getFirstName());
+            employee.setMiddleName(employeUpdateModel.getMiddleName());
+            employee.setLastName(employeUpdateModel.getLastName());
+            employee.setPassword(employeUpdateModel.getPassword());
+            employee.setUserName(employeUpdateModel.getUserName());
+            employee.setProfilePicture(employeUpdateModel.getProfilePicture());
+            employee.setContact_No(employeUpdateModel.getContact_No());
             employee.setAddress(employeUpdateModel.getAddress());
             employee.setGender(employeUpdateModel.getGender());
+            employee.setBirthDate(employeUpdateModel.getBirthDate());
             employee=empRepository.save(employee);
             result="updated succesffully";
         }

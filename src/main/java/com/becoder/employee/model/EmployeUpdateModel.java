@@ -1,44 +1,35 @@
 package com.becoder.employee.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeUpdateModel {
 
-    private String address;
-    private String gender;
+
     private int id;
 
+    private String  firstName;
+    private String  middleName;
+    private String  lastName;
+    private String userName;
+    private String password;
+    private String profilePicture;
+    private String contact_No;
+    private String address;
+    private String gender;
+    private LocalDateTime birthDate;
+    private LocalDateTime updatedAt;
 
-
-    public EmployeUpdateModel(){
-
-    }
-
-    public EmployeUpdateModel(String address, String gender,int id) {
-        this.address = address;
-        this.gender = gender;
-        this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

@@ -2,81 +2,62 @@ package com.becoder.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "EmployeeID")
 	private int id;
 
-	private String name;
+	@Column(name = "FirstName")
+   private String  firstName;
+	@Column(name = "MiddleName")
+	private String  middleName;
+	@Column(name = "LastName")
+	private String  lastName;
 
+	@Column(name = "Email")
 	private String email;
 
-	private String address;
+	@Column(name = "UserName")
+	private String userName;
 
-	private String gender;
-
+	@Column(name = "Password")
 	private String password;
 
-	public int getId() {
-		return id;
-	}
+	@Column(name = "Position")
+	private String position;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	@Column(name = "ProfilePicture")
+	private String profilePicture;
 
-	public String getName() {
-		return name;
-	}
+	@Column(name = "Contact_No")
+	private String contact_No;
+	@Column(name = "Address")
+	private String address;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	@Column(name = "Gender")
+	private String gender;
 
-	public String getEmail() {
-		return email;
-	}
+	@Column(name = "BirthDate")
+	private LocalDateTime birthDate;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	@Column(name = "CreatedAt")
+	private LocalDateTime createdAt;
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", gender="
-				+ gender + ", password=" + password + "]";
-	}
+	@Column(name = "UpdatedAt")
+	private LocalDateTime updatedAt;
 
 }

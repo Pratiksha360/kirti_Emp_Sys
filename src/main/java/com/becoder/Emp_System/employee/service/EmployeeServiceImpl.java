@@ -41,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setEmail(employeeDetails.getEmail());
             employee.setUserName(employeeDetails.getUserName());
             employee.setPassword(employeeDetails.getPassword());
-            employee.setPosition(employeeDetails.getPosition());
+           // employee.setPosition(employeeDetails.getPosition());
             employee.setProfilePicture(employeeDetails.getProfilePicture());
             employee.setContactNo(employeeDetails.getContactNo());
             employee.setAddress(employeeDetails.getAddress());
@@ -56,4 +56,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
+
+   /* @Override
+    public Employee getEmployeeByTaskId(Long taskId) {
+        return  employeeRepository.findEmployeeByTaskId(taskId);
+
+    }*/
 }

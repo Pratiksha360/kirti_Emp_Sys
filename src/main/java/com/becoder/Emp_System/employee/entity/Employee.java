@@ -1,6 +1,8 @@
 package com.becoder.Emp_System.employee.entity;
 
+import com.becoder.Emp_System.log.entity.Log;
 import com.becoder.Emp_System.task.entity.Task;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Table(name = "employees")
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,8 +87,13 @@ public class Employee {
     @Column(name = "UpdatedAt", nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "assignedEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("employee-tasks")
     private List<Task> tasks;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("employee-logs")
+    private List<Log> logs;
 
     public enum Gender {
         MALE, FEMALE, OTHER

@@ -1,5 +1,6 @@
 package com.becoder.Emp_System.task.service;
 
+import com.becoder.Emp_System.employee.entity.Employee;
 import com.becoder.Emp_System.task.entity.Task;
 import com.becoder.Emp_System.task.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class TaskServiceImpl implements TaskService{
             task.setStatus(taskDetails.getStatus());
             task.setStartDate(taskDetails.getStartDate());
             task.setEndDate(taskDetails.getEndDate());
-            task.setEmployee(taskDetails.getEmployee());
+            task.setAssignedEmployee(taskDetails.getAssignedEmployee());
             task.setEstimatedTime(taskDetails.getEstimatedTime());
             return taskRepository.save(task);
         }
@@ -49,7 +50,43 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public void deleteTask(Long id) {
-        taskRepository.deleteById(id);
-    }
-}
 
+    }
+
+    @Override
+//    public Employee getEmployeeByTaskId(Long taskId) {
+//        return taskRepository.findAssignedEmployeeByTaskId(taskId);
+//
+//    }
+    public Employee getEmployeeByTaskId(Long taskId) {
+        Employee employee = taskRepository.findEmployeeByTaskId(taskId);
+
+        return employee;
+    }
+
+//////////////////////////////////////////////////////////
+
+     /*   @Override
+        public Task updateTask(Long id, Task taskDetails) {
+            Optional<Task> optionalTask = taskRepository.findById(id);
+            if (optionalTask.isPresent()) {
+                Task task = optionalTask.get();
+                // Update task details
+                task.setTaskName(taskDetails.getTaskName());
+                task.setDescription(taskDetails.getDescription());
+                task.setProject(taskDetails.getProject());
+                task.setStatus(taskDetails.getStatus());
+                task.setStartDate(taskDetails.getStartDate());
+                task.setEndDate(taskDetails.getEndDate());
+                task.setEstimatedTime(taskDetails.getEstimatedTime());
+
+                // Assign task to employee
+                task.setAssignedEmployee(taskDetails.getAssignedEmployee());
+
+                return taskRepository.save(task);
+            }
+            return null;
+        }
+
+}*/
+}

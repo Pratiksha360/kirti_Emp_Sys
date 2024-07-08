@@ -1,6 +1,7 @@
 package com.becoder.Emp_System.project.entity;
 
 import com.becoder.Emp_System.task.entity.Task;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -53,6 +54,7 @@ public class Project {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("project-tasks")
     private List<Task> tasks;
 
     // Getters and setters

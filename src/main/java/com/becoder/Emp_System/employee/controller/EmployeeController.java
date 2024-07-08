@@ -19,7 +19,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("/createemployee")          // localhost:8080/employee/createemployee
-    public ResponseEntity<?> createEmployee(@Valid @RequestBody Employee employee) {
+    public ResponseEntity<?> createEmployee(@RequestBody @Valid  Employee employee) {
         try {
             Employee createdEmployee = employeeService.saveEmployee(employee);
             return ResponseEntity.ok(createdEmployee);

@@ -2,6 +2,9 @@ package com.becoder.Emp_System.task.entity;
 
 import com.becoder.Emp_System.employee.entity.Employee;
 import com.becoder.Emp_System.project.entity.Project;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,6 +22,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Table(name = "tasks")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Task {
 
     @Id
@@ -36,6 +40,7 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ProjectID" , nullable = false)
+    @JsonBackReference("project-tasks")
     private Project project;
 
     @NotBlank(message = "Status is mandatory")
@@ -49,9 +54,9 @@ public class Task {
     @Column(name = "EndDate")
     private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EmployeeID",nullable = false)
-    private Employee employee;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "EmployeeID")
+    private Employee assignedEmployee;
 
     @Column(name = "EstimatedTime")
     private Long estimatedTime;
@@ -62,16 +67,5 @@ public class Task {
     @Column(name = "UpdatedAt", nullable = false)
     private LocalDateTime updatedAt;
 
-    // Getters and setters
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+    // Constructors, getters, setters, lifecycle methods
 }
